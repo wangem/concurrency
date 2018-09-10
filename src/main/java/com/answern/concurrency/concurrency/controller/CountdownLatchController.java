@@ -22,26 +22,25 @@ import java.util.concurrent.Executors;
  * 创建时间:[2018/9/3 16:04]  <br/>
  * 版本:[v1.0]   <br/>
  */
-@Api(value = "调用异步方法测试", description = "调用异步方法测试")
+@Api(value = "发令枪并发执行", description = "发令枪并发执行")
 @RestController
-@RequestMapping("executeAsyncTask")
-public class ExecuteAsyncTaskController {
+@RequestMapping("countdownLatch")
+public class CountdownLatchController {
 
-    private final static Logger logger = LoggerFactory.getLogger(ExecuteAsyncTaskController.class);
+    private final static Logger logger = LoggerFactory.getLogger(CountdownLatchController.class);
 
-    @Autowired
-    ExecuteAsyncTaskService executeAsyncTaskService;
+
     /**
      * 调用异步方法
      * @return
      */
     @ApiOperation(value = "调用异步方法", notes = "调用异步方法")
-    @RequestMapping(value = "executeAsyncTask" ,method = RequestMethod.GET)
-    public String executeAsyncTask(){
-        executeAsyncTaskService.executeAsyncTask(70);
+    @RequestMapping(value = "countdownLatch" ,method = RequestMethod.GET)
+    public String countdownLatch(){
 
-        return "调用异步方法ok";
+        return "并发";
     }
+
 
   
 
