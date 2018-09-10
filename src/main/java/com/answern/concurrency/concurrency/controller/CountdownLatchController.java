@@ -1,7 +1,10 @@
 package com.answern.concurrency.concurrency.controller;
 
+import com.answern.concurrency.concurrency.service.CountdownLatchRestTemplateService;
 import com.answern.concurrency.concurrency.service.ExecuteAsyncTaskService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,20 +27,24 @@ import java.util.concurrent.Executors;
  */
 @Api(value = "发令枪并发执行", description = "发令枪并发执行")
 @RestController
-@RequestMapping("countdownLatch")
+@RequestMapping("/countdownLatch")
 public class CountdownLatchController {
 
     private final static Logger logger = LoggerFactory.getLogger(CountdownLatchController.class);
 
 
+    @Autowired
+    CountdownLatchRestTemplateService countdownLatchRestTemplateService;
+
     /**
      * 调用异步方法
      * @return
      */
-    @ApiOperation(value = "调用异步方法", notes = "调用异步方法")
-    @RequestMapping(value = "countdownLatch" ,method = RequestMethod.GET)
-    public String countdownLatch(){
-
+    @ApiOperation(value = "并发调用方法", notes = "并发调用方法" )
+    @RequestMapping(value = "index" ,method = RequestMethod.GET)
+    public String countdownLatch(String url,int countNumber){
+        //"http://localhost:8080/resttemplate/main"
+        countdownLatchRestTemplateService.resttemplate(countNumber,url);
         return "并发";
     }
 

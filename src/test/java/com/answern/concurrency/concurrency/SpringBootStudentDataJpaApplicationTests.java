@@ -15,6 +15,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +27,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -33,62 +37,70 @@ import net.minidev.json.JSONObject;
 @SpringBootTest
 public class SpringBootStudentDataJpaApplicationTests {
 
-    @Test
-    public void contextLoads() {
-    }
 
-    private MockMvc mockMvc; // 模拟MVC对象，通过MockMvcBuilders.webAppContextSetup(this.wac).build()初始化。
+    MockMvc mvc;
 
     @Autowired
-    private WebApplicationContext wac; // 注入WebApplicationContext
+    WebApplicationContext webApplicationConnect;
 
-//    @Autowired
-//    private MockHttpSession session;// 注入模拟的http session
-//
-//    @Autowired
-//    private MockHttpServletRequest request;// 注入模拟的http request\
 
-    @Before // 在测试开始前初始化工作
-    public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    String expectedJson;
+
+    @Before
+    public void setUp() throws JsonProcessingException {
+        mvc = MockMvcBuilders.webAppContextSetup(webApplicationConnect).build();
+
     }
 
     @Test
-    public void testQ1() throws Exception {
-        Map<String, Object> map = new HashMap<>();
-        map.put("address", "合肥");
+    public void testShow() throws Exception {
+        String expectedResult = "hello world!";
+        String uri = "/show";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+        int status = mvcResult.getResponse().getStatus();
+        String content = mvcResult.getResponse().getContentAsString();
 
-        MvcResult result = mockMvc.perform(post("/q1?address=合肥").content(JSONObject.toJSONString(map)))
-                .andExpect(status().isOk())// 模拟向testRest发送get请求
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
-                .andReturn();// 返回执行请求的结果
+        Assert.assertTrue("错误，正确的返回值为200", status == 200);
+        Assert.assertFalse("错误，正确的返回值为200", status != 200);
+        Assert.assertTrue("数据一致", expectedResult.equals(content));
+        Assert.assertFalse("数据不一致", !expectedResult.equals(content));
+    }
 
-        System.out.println(result.getResponse().getContentAsString());
+    protected String Obj2Json(Object obj) throws JsonProcessingException {
+        ObjectMapper mapper=new ObjectMapper();
+        return mapper.writeValueAsString(obj);
     }
 
     @Test
-    public void testSave() throws Exception {
-        Map<String, Object> map = new HashMap<>();
-        map.put("address", "合肥");
-        map.put("name", "测试");
-        map.put("age", 50);
+    public void testShowDaoInt() throws Exception {
+//        List<TestPOJO> testPOJOList = testServices.showDao(10);
+//        expectedJson = Obj2Json(testPOJOList);
 
-        MvcResult result = mockMvc.perform(post("/save").contentType(MediaType.APPLICATION_JSON).content(JSONObject.toJSONString(map)))
-                .andExpect(status().isOk())// 模拟向testRest发送get请求
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
-                .andReturn();// 返回执行请求的结果
+        String uri="/showDao?age=10";
+        MvcResult mvcResult=mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
+        int status=mvcResult.getResponse().getStatus();
+        String content=mvcResult.getResponse().getContentAsString();
 
-        System.out.println(result.getResponse().getContentAsString());
+        Assert.assertTrue("错误，正确的返回值为200", status == 200);
+        Assert.assertFalse("错误，正确的返回值为200", status != 200);
+        Assert.assertTrue("数据一致", expectedJson.equals(content));
+        Assert.assertFalse("数据不一致", !expectedJson.equals(content));
     }
 
     @Test
-    public void testPage() throws Exception {
-        MvcResult result = mockMvc.perform(post("/page").param("pageNo", "1").param("pageSize", "2"))
-                .andExpect(status().isOk())// 模拟向testRest发送get请求
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
-                .andReturn();// 返回执行请求的结果
+    public void testShowDaoString() throws Exception {
+//        List<HotelDto> hotelDtoList=testServices.findByCountry("US");
+//        expectedJson = Obj2Json(hotelDtoList);
 
-        System.out.println(result.getResponse().getContentAsString());
+        String uri="/country/US";
+        MvcResult mvcResult=mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
+        int status=mvcResult.getResponse().getStatus();
+        String content=mvcResult.getResponse().getContentAsString();
+
+        Assert.assertTrue("错误，正确的返回值为200", status == 200);
+        Assert.assertFalse("错误，正确的返回值为200", status != 200);
+        Assert.assertTrue("数据一致", expectedJson.equals(content));
+        Assert.assertFalse("数据不一致", !expectedJson.equals(content));
     }
-
 }

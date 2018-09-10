@@ -2,6 +2,8 @@ package com.answern.concurrency.concurrency;
 
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -21,11 +23,11 @@ public class BaseTest {
     @Autowired
     private WebApplicationContext wac; // 注入WebApplicationContext
 
-//    @Autowired
-//    private MockHttpSession session;// 注入模拟的http session
+    @Autowired
+    private MockHttpSession session;// 注入模拟的http session
 //
-//    @Autowired
-//    private MockHttpServletRequest request;// 注入模拟的http request\
+    @Autowired
+    private MockHttpServletRequest request;// 注入模拟的http request\
 
     @Before // 在测试开始前初始化工作
     public void setup() {

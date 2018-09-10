@@ -2,6 +2,7 @@ package com.answern.concurrency.concurrency.base;
 
 import sun.applet.Main;
 
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -15,27 +16,23 @@ public abstract  class RunThreadServer implements Runnable {
 
     private CountDownLatch begin;
     private CountDownLatch end;
-    //服务名称
-    private String _serviceName;
-    // 服务启动开关
-    private boolean _serviceUp;
+
+    private Map producesMap;
 
 
-    public RunThreadServer(String serviceName, CountDownLatch  begin,CountDownLatch end){
+    public RunThreadServer( CountDownLatch  begin, CountDownLatch end, Map producesMap){
         super();
         this.begin = begin;
         this.end = end;
-        this._serviceName = serviceName;
-        this._serviceUp = false;
+        this.producesMap = producesMap;
     }
     @Override
     public void run() {
         try {
             begin.await();
-            verifyService();
+            verifyService(producesMap);
         } catch (Throwable  e) {
             e.printStackTrace(System.err);
-            _serviceUp = false;
         } finally {
             System.out.println("end="+end.getCount());
             end.countDown();//其中的一个参赛选手已经跑完了
@@ -45,13 +42,9 @@ public abstract  class RunThreadServer implements Runnable {
     /**
      * 并发线程要执行的方法
      */
-    public abstract void verifyService();
+    public abstract void verifyService(Map producesMap);
 
-    public String getServiceName() {
-        return _serviceName;
-    }
 
-    public boolean isServiceUp() {
-        return _serviceUp;
-    }
+
+
 }

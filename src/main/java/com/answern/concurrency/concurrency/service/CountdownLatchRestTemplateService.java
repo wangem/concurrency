@@ -2,8 +2,12 @@ package com.answern.concurrency.concurrency.service;
 
 import com.answern.concurrency.concurrency.Dao.RunThreadServerImp;
 import com.answern.concurrency.concurrency.base.RunThreadServer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -19,27 +23,29 @@ import java.util.concurrent.Executors;
 @Service
 public class CountdownLatchRestTemplateService {
 
-    public static void resttemplate(){
-        int countNumber = 10;
+    @Autowired
+    RestTemplate restTemplate ;
+
+    public   void resttemplate(int countNumber,String url){
+       // int countNumber = 10;
+        Map producesMap = new HashMap();
+        producesMap.put("url",url);
+        producesMap.put("i",2);
+        producesMap.put("restTemplate",restTemplate);
         //裁判员鸣枪信号
         CountDownLatch begin = new CountDownLatch(1);
         //10名参赛选手结束信号
         CountDownLatch end = new CountDownLatch(countNumber);
 
 
-        RunThreadServer runThreadServer = new RunThreadServerImp("restTemplate",begin,end);
+        RunThreadServer runThreadServer = new RunThreadServerImp(begin,end,producesMap);
 
         Executor executor = Executors.newFixedThreadPool(countNumber);
 
             for(int i =0;i<countNumber;i++)
             {
-                System.out.println("getCount="+end.getCount());
                 executor.execute(runThreadServer);
-
-                System.out.println("over");
             }
-            System.out.println("countDown");
-
             begin.countDown();//裁判员鸣枪了
             try {
                 end.await();//等待10个参赛选手都跑完100米
@@ -49,8 +55,6 @@ public class CountdownLatchRestTemplateService {
 
     }
 
-    public static void main(String[] args) {
-        resttemplate();
-    }
+
 
 }

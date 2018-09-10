@@ -36,7 +36,7 @@ public class RestTemplateController {
     @RequestMapping(value = "main",method = RequestMethod.GET)
     public String test(String i){
         logger.info( "this is amin=="+i);
-        return " this is main";
+        return " this is main"+i;
     }
 
     /**

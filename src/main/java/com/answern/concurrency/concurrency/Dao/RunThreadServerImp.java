@@ -1,7 +1,11 @@
 package com.answern.concurrency.concurrency.Dao;
 
 import com.answern.concurrency.concurrency.base.RunThreadServer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -12,29 +16,36 @@ import java.util.concurrent.CountDownLatch;
  * 创建时间:[2018/9/8 15:49]  <br/>
  * 版本:[v1.0]   <br/>
  */
+@ComponentScan
 public class RunThreadServerImp  extends RunThreadServer {
 
 
-    /**
-     *
-     * @param serviceName  指令名称
-     * @param begin
-     */
-    public RunThreadServerImp(String serviceName, CountDownLatch begin,CountDownLatch end) {
-        super(serviceName, begin,end);
+    private RestTemplate restTemplate ;
+
+    private Map producesMap;
+
+    public RunThreadServerImp(CountDownLatch begin,CountDownLatch end, Map producesMap) {
+        super(begin,end,producesMap);
+        this.producesMap = producesMap;
+
     }
 
     @Override
-    public void verifyService() {
-        System.out.println("Checking " + this.getServiceName());
+    public void verifyService(Map producesMap) {
+        String url = producesMap.get("url").toString();
+        String i = producesMap.get("i").toString();
+        this.restTemplate = (RestTemplate)producesMap.get("restTemplate");
         try
         {
-            Thread.sleep(7000);
+            System.out.println( " is UP");
+            //Thread.sleep(7000);
+            restTemplate.getForObject(url+"?i="+i, String.class);
+
         }
-        catch (InterruptedException e)
+        catch (Exception e)
         {
             e.printStackTrace();
         }
-        System.out.println(this.getServiceName() + " is UP");
+       // System.out.println(this.getServiceName() + " is UP");
     }
 }
