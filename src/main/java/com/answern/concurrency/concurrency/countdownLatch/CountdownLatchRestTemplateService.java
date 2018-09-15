@@ -1,9 +1,6 @@
-package com.answern.concurrency.concurrency.service;
+package com.answern.concurrency.concurrency.countdownLatch;
 
-import com.answern.concurrency.concurrency.Dao.RunThreadServerImp;
-import com.answern.concurrency.concurrency.base.RunThreadServer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 /**
  * 需求名称:

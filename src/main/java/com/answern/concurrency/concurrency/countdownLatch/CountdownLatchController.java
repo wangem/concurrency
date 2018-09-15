@@ -1,10 +1,6 @@
-package com.answern.concurrency.concurrency.controller;
+package com.answern.concurrency.concurrency.countdownLatch;
 
-import com.answern.concurrency.concurrency.service.CountdownLatchRestTemplateService;
-import com.answern.concurrency.concurrency.service.ExecuteAsyncTaskService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * 需求名称:

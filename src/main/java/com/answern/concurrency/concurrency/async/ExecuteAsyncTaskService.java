@@ -1,4 +1,4 @@
-package com.answern.concurrency.concurrency.service;
+package com.answern.concurrency.concurrency.async;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

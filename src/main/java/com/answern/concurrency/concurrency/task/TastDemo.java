@@ -1,4 +1,4 @@
-package com.answern.concurrency.concurrency.server;
+package com.answern.concurrency.concurrency.task;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

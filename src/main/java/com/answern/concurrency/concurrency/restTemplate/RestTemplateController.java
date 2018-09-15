@@ -1,4 +1,4 @@
-package com.answern.concurrency.concurrency.controller;
+package com.answern.concurrency.concurrency.restTemplate;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.swagger.annotations.Api;

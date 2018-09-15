@@ -1,4 +1,4 @@
-package com.answern.concurrency.concurrency.base;
+package com.answern.concurrency.concurrency.task;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

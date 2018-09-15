@@ -1,7 +1,6 @@
-package com.answern.concurrency.concurrency.Dao;
+package com.answern.concurrency.concurrency.countdownLatch;
 
-import com.answern.concurrency.concurrency.base.RunThreadServer;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.answern.concurrency.concurrency.countdownLatch.RunThreadServer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 

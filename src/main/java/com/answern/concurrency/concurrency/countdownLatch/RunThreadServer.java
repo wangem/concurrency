@@ -1,4 +1,4 @@
-package com.answern.concurrency.concurrency.base;
+package com.answern.concurrency.concurrency.countdownLatch;
 
 import sun.applet.Main;
 
