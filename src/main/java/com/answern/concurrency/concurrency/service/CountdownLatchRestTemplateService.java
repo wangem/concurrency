@@ -3,6 +3,7 @@ package com.answern.concurrency.concurrency.service;
 import com.answern.concurrency.concurrency.Dao.RunThreadServerImp;
 import com.answern.concurrency.concurrency.base.RunThreadServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,6 +27,10 @@ public class CountdownLatchRestTemplateService {
     @Autowired
     RestTemplate restTemplate ;
 
+
+    @Autowired
+    Executor asyncServiceExecutor;
+
     public   void resttemplate(int countNumber,String url){
        // int countNumber = 10;
         Map producesMap = new HashMap();
@@ -40,11 +45,12 @@ public class CountdownLatchRestTemplateService {
 
         RunThreadServer runThreadServer = new RunThreadServerImp(begin,end,producesMap);
 
-        Executor executor = Executors.newFixedThreadPool(countNumber);
+
+       // Executor executor = Executors.newFixedThreadPool(countNumber);
 
             for(int i =0;i<countNumber;i++)
             {
-                executor.execute(runThreadServer);
+                asyncServiceExecutor.execute(runThreadServer);
             }
             begin.countDown();//裁判员鸣枪了
             try {
