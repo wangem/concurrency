@@ -41,7 +41,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-		<!-- swagger2  didispace封装-->
+		<!-- swagger2   -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -53,7 +53,12 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.8.0</version>
 		</dependency>
-
+        <!--aop-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+			<!--<version>2.0.2.RELEASE</version>-->
+		</dependency>
 
     </dependencies>
 

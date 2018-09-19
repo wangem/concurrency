@@ -24,7 +24,7 @@ public class TastDemo {
     /**
      * demo 1
      */
-    @Scheduled(cron="*/6 * * * * ?")
+    @Scheduled(cron="0 0 1 * * ?")
     private void process(){
         System.out.println("[" + Thread.currentThread().getName() + "]" + "this is scheduler task runing  "+(count++));
     }
@@ -33,8 +33,9 @@ public class TastDemo {
 
     /**
      * drmo 2
+     * 60000 1分钟
      */
-    @Scheduled(fixedRate = 6000)
+    @Scheduled(fixedRate = 600000)
     public void reportCurrentTime() {
         System.out.println("[" + Thread.currentThread().getName() + "]" + "现在时间：" + dateFormat.format(new Date()));
     }
