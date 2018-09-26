@@ -1,19 +1,15 @@
-package com.answern.concurrency.concurrency.customTags;
+package com.answern.concurrency.concurrency.customTags.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
 /**
  * 需求名称:
@@ -34,11 +30,9 @@ public class AopAspect {
     @Before("@annotation(test)")// 拦截被TestAnnotation注解的方法；如果你需要拦截指定package指定规则名称的方法，可以使用表达式execution(...)，具体百度一下资料一大堆
     public void beforeTest(JoinPoint joinPoint, AopDosomething test) throws Throwable {
 
-        System.out.println("beforeTest test.name():" + test.name()+"");
-        System.out.println("getName():" +joinPoint.getArgs()[0] +"");
-
-
+        logger.info("name:{},getName{}",test.name(),joinPoint.getArgs()[0]);
     }
+
     @After("@annotation(test)")
     public void after(JoinPoint point, AopDosomething test){
         System.out.println("after......"+ test.name());
