@@ -20,3 +20,12 @@
         
 #集成了自定义注解的使用
 customTags
+## 1 自定义注解--拦截器
+    interceptor
+        访问地址 http://localhost:8080/admin?role=111
+        controller 通过@Access(authorities = {"admin"})注解拦截role=111后面是否有权限
+        
+## 2 自定义注解--切面
+    async
+## 3 自定义注解--spring mvc（未实现）
+    customservice 
