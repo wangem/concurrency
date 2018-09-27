@@ -3,8 +3,8 @@ package com.answern.concurrency.concurrency.customTags.customservice;
 import com.answern.concurrency.concurrency.customTags.customservice.annotation.*;
 
 /**
- * 需求名称:
- * 类描述:[一句话描述该类的功能]<br/>
+ * 需求名称: 这个功能是没有实现的
+ *  自定义spring mvc的注解<br/>
  *
  * @author [wem] <br/>
  * 创建时间:[2018/9/26 21:16]  <br/>
@@ -19,7 +19,7 @@ public class AnController {
 
     @MyRequestMapping(name = "init")
     public String init(@MyRequestParam("name") String name){
-        System.out.println(anService.thisInit());
+        System.out.println("is init insert ");
         System.out.println(anService.thisInit());
         return name;
     }
