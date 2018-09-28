@@ -22,6 +22,7 @@
 customTags
 ## 1 自定义注解--拦截器
     interceptor
+    这里实现了一个权限的控制
         访问地址 http://localhost:8080/admin?role=111
         controller 通过@Access(authorities = {"admin"})注解拦截role=111后面是否有权限
         
@@ -29,3 +30,6 @@ customTags
     async
 ## 3 自定义注解--spring mvc（未实现）
     customservice 
+    
+#4集成分布式事物实现方法
+    distributed
