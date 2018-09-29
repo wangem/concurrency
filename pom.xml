@@ -5,7 +5,7 @@
 
 	<groupId>com.answern.concurrency</groupId>
 	<artifactId>concurrency</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 
 	<name>concurrency</name>
@@ -77,6 +77,13 @@
 			<scope>runtime</scope>
 		</dependency>
 
+        <!--  lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 	<build>

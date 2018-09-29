@@ -32,5 +32,8 @@ customTags
 ## 3 自定义注解--spring mvc（未实现）
     customservice 
     
-#4集成分布式事物实现方法
+# 4集成分布式事物实现方法
     distributed
+# 5 增加了读取配置文件配置属性的方法
+    readApplication
+    写了两种程序读取配置文件的方法
