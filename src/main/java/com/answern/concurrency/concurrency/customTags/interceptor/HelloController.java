@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 版本:[v1.0]   <br/>
  */
 @RestController
+@RequestMapping("/interceptor")
 public class HelloController {
 
     @RequestMapping(value = "/admin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)

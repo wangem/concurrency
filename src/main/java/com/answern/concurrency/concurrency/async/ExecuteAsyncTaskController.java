@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 /**
  * 需求名称:
  * 类描述:[调用异步方法测试]<br/>
@@ -36,6 +41,35 @@ public class ExecuteAsyncTaskController {
         executeAsyncTaskService.executeAsyncTask(70);
 
         return "调用异步方法ok";
+    }
+
+    @ApiOperation(value = "调用异步方法带返回值", notes = "调用异步方法带返回值")
+    @RequestMapping(value = "executeAsyncTaskReturn" ,method = RequestMethod.GET)
+    public String executeAsyncTaskReturn(){
+        Future<String> stringFuture = executeAsyncTaskService.executeAsyncTaskReturn(7000);
+        System.out.println("方法跳过了");
+        String s="";
+        try {
+            String s1 ="";
+            try {
+                 s1 = stringFuture.get(5000, TimeUnit.MILLISECONDS);
+            } catch (TimeoutException e) {
+                System.out.println("is error");
+            }
+
+            boolean done = stringFuture.isDone();
+            System.out.println("s1 =="+s1);
+            System.out.println("done =="+done);
+            //在这里等待线程执行完成
+            s = stringFuture.get();
+            System.out.println(s);
+            System.out.println("stringFuture.isDone() =="+stringFuture.isDone());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return "调用异步方法ok"+s;
     }
 
   

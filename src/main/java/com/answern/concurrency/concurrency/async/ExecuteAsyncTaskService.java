@@ -1,7 +1,10 @@
 package com.answern.concurrency.concurrency.async;
 
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.Future;
 
 /**
  * 需求名称:
@@ -23,5 +26,16 @@ public class ExecuteAsyncTaskService {
             e.printStackTrace();
         }
         System.out.println("异步任务执行："+n);
+    }
+
+    @Async("asyncServiceExecutor")
+    public Future<String> executeAsyncTaskReturn(Integer n){
+        try {
+            Thread.sleep(n);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("异步任务执行返回："+n);
+        return new AsyncResult<>("任务完成");
     }
 }

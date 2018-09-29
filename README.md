@@ -5,6 +5,7 @@
   restTemplate
 #集成异步调用方法
     async
+    两个方法，一个不对返回做处理，另一个对返回值做处理
 #集成SpringTask 定时任务
       task
       参数说明
