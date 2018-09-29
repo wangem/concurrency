@@ -3,3 +3,22 @@ com:
     id: 这里是id
     name: 这里是name
     foo: 这里是foo
+# 自定义配置list形式
+comList:
+  answern:
+    id[0]: 这里是idList
+    id[1]: 这里是idList1
+    id[2]: 这里是idList2
+comList1:
+  answernlist[0]:
+    id: 这里是idList
+    name: 这里是nameList
+    foo: 这里是fooList
+  answernlist[1]:
+      id: 这里是idList1
+      name: 这里是nameList1
+      foo: 这里是fooList1
+  answernlist[2]:
+        id: 这里是idList2
+        name: 这里是nameList2
+        foo: 这里是fooList2

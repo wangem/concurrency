@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 需求名称:
- * 类描述:[一句话描述该类的功能]<br/>
+ * 需求名称:分布式事物<br/>
  *
  * @author [wem] <br/>
  * 创建时间:[2018/9/28 11:14]  <br/>

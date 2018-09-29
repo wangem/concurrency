@@ -20,7 +20,7 @@
         8. zone：时区，默认为当前时区，一般没有用到。
         
 #集成了自定义注解的使用
-customTags
+    customTags
 ## 1 自定义注解--拦截器
     interceptor
     这里实现了一个权限的控制
@@ -32,8 +32,9 @@ customTags
 ## 3 自定义注解--spring mvc（未实现）
     customservice 
     
-# 4集成分布式事物实现方法
+# 4 集成分布式事物实现方法
     distributed
 # 5 增加了读取配置文件配置属性的方法
     readApplication
     写了两种程序读取配置文件的方法
+    读取配置文件中的list配置
