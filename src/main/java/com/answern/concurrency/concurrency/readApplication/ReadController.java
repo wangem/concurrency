@@ -46,6 +46,10 @@ public class ReadController {
         return "ok";
     }
 
+    /**
+     * 读取配置文件中list的方法
+     * @return
+     */
     @RequestMapping("indexList")
     public String indexList(){
         List<String> ids = readConfigList.getId();
