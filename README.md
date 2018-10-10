@@ -1,12 +1,12 @@
-#使用发令枪并发调用http地址
+# 使用发令枪并发调用http地址
     countdownLatch 写了一个发令枪的实例
-#SpringBoot集成resttemplate
+# SpringBoot集成resttemplate
  写了SpringBoot集成resttemplate的使用方法
   restTemplate
-#集成异步调用方法
+# 集成异步调用方法
     async
     两个方法，一个不对返回做处理，另一个对返回值做处理
-#集成SpringTask 定时任务
+# 集成SpringTask 定时任务
       task
       参数说明
         @Scheduled所支持的参数： 
@@ -19,7 +19,7 @@
         7. initialDelayString：与initialDelay的含义一样，只是将参数类型变为String； 
         8. zone：时区，默认为当前时区，一般没有用到。
         
-#集成了自定义注解的使用
+# 集成了自定义注解的使用
     customTags
 ## 1 自定义注解--拦截器
     interceptor
