@@ -44,3 +44,6 @@
          被观察者中集成了观察者的方法，当调用被观察者是，激发了观察者里的方法
          耦合性过高
     2 template 魔板模式
+    
+# redis自增id用法
+    redisOrderNumber
