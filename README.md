@@ -47,3 +47,5 @@
     
 # redis自增id用法
     redisOrderNumber
+    
+# 布隆过滤器
