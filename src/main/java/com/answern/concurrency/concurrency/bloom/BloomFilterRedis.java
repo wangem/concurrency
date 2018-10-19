@@ -11,9 +11,17 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.Charset;
 
 /**
- * 需求名称:
- * 类描述:[一句话描述该类的功能]<br/>
+ * 需求名称:利用redis存储布隆过滤器指纹<br/>
  *
+ * 像网易、腾讯等公众电子邮件（email）提供商，总是需要过滤来自发送垃圾邮件的人（spamer）的垃圾邮件。
+ * 一个办法就是记录下那些发垃圾邮件的 email地址。由于那些发送者不停地在注册新的地址，
+ * 全世界少说也有几十亿个发送垃圾邮件的地址，将他们都存起来则需要大量的网络服务器。
+ * 如果用哈希表，每存储一亿个 email地址，就需要 1.6GB的内存
+ * （用哈希表实现的具体办法是将每一个 email地址对应成一个八字节的信息指纹，然后将这些信息指纹存入哈希表，
+ * 由于哈希表的存储效率一般只有 50%，因此一个 email地址需要占用十六个字节。一亿个地址大约要 1.6GB，即十六亿字节的内存）。
+ * 因此存贮几十亿个邮件地址可能需要上百GB的内存。而Bloom Filter只需要哈希表 1/8到 1/4 的大小就能解决同样的问题。
+ * BloomFilter决不会漏掉任何一个在黑名单中的可疑地址。
+ * 而至于误判问题，常见的补救办法是在建立一个小的白名单，存储那些可能别误判的邮件地址
  * @author [wem] <br/>
  * 创建时间:[2018/10/19 10:39]  <br/>
  * 版本:[v1.0]   <br/>
@@ -60,9 +68,7 @@ public class BloomFilterRedis {
         ValueOperations<String,String> ops = redisTemplate.opsForValue();
         RedisOperations<String, String> operations = ops.getOperations();
 
-        System.out.println("indexss =="+indexs);
         for (long index : indexs) {
-            System.out.println("index =="+index);
             result =ops.getBit(getRedisKey(where), index);
             if (!result) {
                 put(where, key);

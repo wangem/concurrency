@@ -1,8 +1,8 @@
 # 使用发令枪并发调用http地址
     countdownLatch 写了一个发令枪的实例
 # SpringBoot集成resttemplate
- 写了SpringBoot集成resttemplate的使用方法
-  restTemplate
+     写了SpringBoot集成resttemplate的使用方法
+      restTemplate
 # 集成异步调用方法
     async
     两个方法，一个不对返回做处理，另一个对返回值做处理
