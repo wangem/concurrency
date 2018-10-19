@@ -53,3 +53,7 @@
     实现了根据逻辑判断应该打印到那个目录的日志
     
 # 布隆过滤器
+    bloom
+    BloomFilterRedis 通过redis存储bit指纹
+    BloomFilter      普通布隆过滤器算法
+    
