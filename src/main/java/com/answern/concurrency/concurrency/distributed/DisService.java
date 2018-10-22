@@ -1,11 +1,17 @@
 package com.answern.concurrency.concurrency.distributed;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 需求名称:分布式编程式事物<br/>
@@ -19,6 +25,8 @@ public class DisService {
 
     @Autowired
     private TransactionTemplate transactionTemplate;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     public String index(){
         System.out.println("这里写其他事物");
@@ -31,6 +39,31 @@ public class DisService {
                 return null;
             }
         });
+        return "ok";
+    }
+
+    @Transactional
+    public String TransactionalMethod(){
+        SingleColumnRowMapper<User> userSingleColumnRowMapper = new SingleColumnRowMapper<>(User.class);
+
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList(" select id ,name,sex from user ");
+        for(Map<String, Object>  o:maps){
+            System.out.println(o.get("id").toString()+o.get("name")+o.get("sex"));
+
+        }
+        System.out.println("============================================");
+        jdbcTemplate.update(" UPDATE user  set  name='yy' where  id=1 ");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("==============over=======================");
+        List<Map<String, Object>> maps1 = jdbcTemplate.queryForList(" select id ,name,sex from user ");
+        for(Map<String, Object>  o:maps1){
+            System.out.println(o.get("id").toString()+o.get("name")+o.get("sex"));
+
+        }
         return "ok";
     }
 }
