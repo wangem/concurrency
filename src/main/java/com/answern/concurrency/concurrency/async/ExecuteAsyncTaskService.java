@@ -18,7 +18,7 @@ import java.util.concurrent.Future;
 public class ExecuteAsyncTaskService {
 
 
-    @Async("asyncServiceExecutor")
+    @Async("asyncServiceExecutors")
     public  void executeAsyncTask(Integer n){
         try {
             Thread.sleep(5000);
@@ -28,7 +28,7 @@ public class ExecuteAsyncTaskService {
         System.out.println("异步任务执行："+n);
     }
 
-    @Async("asyncServiceExecutor")
+    @Async("asyncServiceExecutors")
     public Future<String> executeAsyncTaskReturn(Integer n){
         try {
             Thread.sleep(n);

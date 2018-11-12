@@ -25,7 +25,7 @@ public class CountdownLatchRestTemplateService {
 
 
     @Autowired
-    Executor asyncServiceExecutor;
+    Executor asyncServiceExecutors;
 
     public   void resttemplate(int countNumber,String url){
        // int countNumber = 10;
@@ -46,7 +46,7 @@ public class CountdownLatchRestTemplateService {
 
             for(int i =0;i<countNumber;i++)
             {
-                asyncServiceExecutor.execute(runThreadServer);
+                asyncServiceExecutors.execute(runThreadServer);
             }
             begin.countDown();//裁判员鸣枪了
             try {
