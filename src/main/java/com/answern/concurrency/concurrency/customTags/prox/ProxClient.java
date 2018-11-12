@@ -10,14 +10,14 @@ import java.lang.annotation.*;
  * 创建时间:[2018/9/26 16:57]  <br/>
  * 版本:[v1.0]   <br/>
  */
-@Target({ElementType.ANNOTATION_TYPE,ElementType.METHOD})
+@Target({ElementType.ANNOTATION_TYPE,ElementType.METHOD,ElementType.TYPE})
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ProxDosomething {
+public @interface ProxClient {
 
-    String key() default "";
+    String name()  default "";
 
-    String name();
+    String value() default "";
 
     boolean isLogs() default false;
 }

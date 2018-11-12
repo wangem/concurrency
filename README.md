@@ -6,6 +6,13 @@
 # 集成异步调用方法
     async
     两个方法，一个不对返回做处理，另一个对返回值做处理
+    
+    runable
+    collable
+    futureTask
+    thread(futureTask)
+    主线程被使用的时间  controller return  collable、defretResult
+    
 # 集成SpringTask 定时任务
       task
       参数说明
@@ -31,10 +38,12 @@
     async
 ## 3 自定义注解--spring mvc（未实现）
     customservice 
-    
-# 4 集成分布式事物实现方法
+## 4 自定义注解--prox（未实现）
+    prox 
+
+#  集成分布式事物实现方法
     distributed
-# 5 增加了读取配置文件配置属性的方法
+#  增加了读取配置文件配置属性的方法
     readApplication
     写了两种程序读取配置文件的方法
     读取配置文件中的list配置
@@ -57,3 +66,6 @@
     BloomFilterRedis 通过redis存储bit指纹
     BloomFilter      普通布隆过滤器算法
     
+    
+# 增加jar自动导入自动配置
+    增加了spring-boot-starter-answern-logback-1.0.1.jar，这个jar中增加了自动加载配置，自定义注解以及自定义配置

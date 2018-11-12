@@ -1,5 +1,7 @@
 package com.answern.concurrency.concurrency.customTags.prox;
 
+import com.answern.logback.config.aop.ControllerLog;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,10 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/prox")
 public class ProxController {
 
-    @ProxDosomething(name = "indexDo")
+    @ProxClient(name = "indexDo")
     @RequestMapping("index")
     public String index(){
         System.out.println("进入indexDo");
+        return "ok";
+    }
+
+
+    @Autowired
+    test11 test11;
+    @RequestMapping("index1")
+    public String index11(){
+
+        System.out.println("进入indexDo");
+        test11.test();
         return "ok";
     }
 }

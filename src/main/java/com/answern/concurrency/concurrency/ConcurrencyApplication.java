@@ -1,20 +1,19 @@
 package com.answern.concurrency.concurrency;
 
-import com.answern.concurrency.concurrency.customTags.customservice.annotation.MyDispatcherServlet;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import javax.servlet.http.HttpServlet;
 
 @EnableSwagger2
 @SpringBootApplication
 @EnableScheduling
+@EnableAspectJAutoProxy
+//@EnableProxClient
 public class ConcurrencyApplication {
 
 	public static void main(String[] args) {
