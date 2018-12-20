@@ -7,13 +7,20 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -24,6 +31,9 @@ public class RestTemplateControllerTest extends  BaseTest{
 
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    RestTemplate restTemplate;
 
 
 
@@ -49,14 +59,19 @@ public class RestTemplateControllerTest extends  BaseTest{
 
     @Test
     public void redisTest(){
-//        try {
-//           // Connection connection = dataSource.getConnection();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-        redisTemplate.delete("0000");
+         String filePath =  "D:\\图片/yanli.jpg";
+        RestTemplate rest = new RestTemplate();
+        FileSystemResource resource = new FileSystemResource(new File(filePath));
+        InputStream inputStream = null;
+        try {
+            inputStream = resource.getInputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
+        param.add("jarFile", inputStream);
+        String s = rest.postForObject(url, param, String.class);
+        System.out.println(s);
     }
 
 
