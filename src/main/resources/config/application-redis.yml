@@ -1,8 +1,6 @@
 spring: 
   redis:
-    host: 10.0.0.230  
-    port: 6379    
-    password: crs-4wny33j2:Ut%3f2#dfg
+
     timeout: 60000
     database: 15
     jedis:
